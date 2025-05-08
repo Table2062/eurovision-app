@@ -20,15 +20,15 @@ import { useForm } from 'react-hook-form';
 import { getFlagEmoji } from "../utils/flagUtils";
 
 const validationSchema = yup.object({
-    username: yup.string().required('Username obbligatorio'),
+    username: yup.string().required('Nome utente obbligatorio'),
     email: yup.string().email('Email non valida'),
     password: yup.string().min(6, 'La password deve contenere almeno 6 caratteri').required('Password obbligatoria'),
     assignedCountry: yup.string().required('Seleziona una nazione')
 });
 
 const RegisterPage = () => {
-    const [countries, setCountries] = useState([]);
     const navigate = useNavigate();
+    const [countries, setCountries] = useState([]);
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [error, setError] = useState('');
 
@@ -49,7 +49,6 @@ const RegisterPage = () => {
                 setError("Errore nel recupero delle nazioni!");
             }
         };
-
         fetchCountries();
     }, []);
 
@@ -75,7 +74,7 @@ const RegisterPage = () => {
                         <TextField
                             fullWidth
                             margin="normal"
-                            label="Username"
+                            label="Nome Utente"
                             {...formRegister('username')}
                             error={!!errors.username}
                             helperText={errors.username?.message}

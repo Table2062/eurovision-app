@@ -1,4 +1,4 @@
-const AUTH_BASE = process.env.REACT_APP_API_BASE+"/auth"; // Modifica se necessario
+const AUTH_BASE = process.env.REACT_APP_API_BASE+"/auth";
 
 // Funzione per registrare un nuovo utente
 export const register = async (username, email, password, assignedCountry) => {
@@ -9,8 +9,7 @@ export const register = async (username, email, password, assignedCountry) => {
     });
 
     if (!response.ok) {
-        const error = await response.text();
-        throw new Error(error || 'Errore nella registrazione');
+        throw new Error('Errore nella registrazione');
     }
 
     return await response.json(); // Restituisce il token e altre info utente
@@ -25,8 +24,7 @@ export const login = async (username, password) => {
     });
 
     if (!response.ok) {
-        const error = await response.text();
-        throw new Error(error || 'Errore nel login');
+        throw new Error('Errore nel login');
     }
 
     return await response.json(); // Restituisce il token e altre info utente
@@ -37,8 +35,7 @@ export const getAllCountries = async () => {
     const response = await fetch(`${AUTH_BASE}/all-countries`);
 
     if (!response.ok) {
-        const error = await response.text();
-        throw new Error(error || 'Errore nel recuperare le nazioni');
+        throw new Error('Errore nel recuperare le nazioni');
     }
 
     return await response.json(); // Restituisce la lista delle nazioni

@@ -10,17 +10,17 @@ import {yupResolver} from '@hookform/resolvers/yup';
 
 // Schema di validazione con Yup
 const validationSchema = yup.object({
-    username: yup.string().required('Username obbligatorio'),
+    username: yup.string().required('Nome utente obbligatorio'),
     password: yup.string().required('Password obbligatoria')
 });
 
 const LoginPage = () => {
+    const navigate = useNavigate();
     const {register, handleSubmit, formState: {errors}} = useForm({
         resolver: yupResolver(validationSchema)
     });
     const loginStore = useAuthStore((state) => state.login);
     const { token, isAdmin } = useAuthStore();
-    const navigate = useNavigate();
     const [error, setError] = useState('');
 
     useEffect(() => {
@@ -37,7 +37,7 @@ const LoginPage = () => {
             loginStore(token, decoded.isAdmin);
             navigate(decoded.isAdmin ? '/admin' : '/vote');
         } catch (err) {
-            setError('Login fallito. Controlla username e password.');
+            setError('Login fallito. Controlla nome utente e password.');
         }
     };
 
@@ -56,7 +56,7 @@ const LoginPage = () => {
 
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <TextField
-                            label="Username"
+                            label="Nome utente"
                             fullWidth
                             margin="normal"
                             {...register('username')}

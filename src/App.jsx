@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import NotFoundPage from './pages/NotFoundPage';
 import RegisterPage from './pages/RegisterPage';
-// import VotePage from './pages/VotePage';
+// import VotePage.jsx from './pages/VotePage.jsx';
 import AdminRoute from './components/AdminRoute';
 import PrivateRoute from './components/PrivateRoute';
 import RedirectFromRoot from './components/RedirectFromRoot';
@@ -11,6 +11,7 @@ import LogoutRoute from "./components/LogoutRoute";
 import AdminDashboardPage from "./pages/AdminDashboardPage";
 import Footer from "./components/Footer";
 import {Box} from "@mui/material";
+import VotePage from "./pages/VotePage";
 
 function App() {
     return (
@@ -26,7 +27,7 @@ function App() {
                         <Route path="/register" element={<RegisterPage/>}/>
                         <Route path="/vote" element={
                             <PrivateRoute>
-                                {/*<VotePage/>*/}
+                                {<VotePage/>}
                             </PrivateRoute>
                         }/>
                         <Route path="/admin" element={

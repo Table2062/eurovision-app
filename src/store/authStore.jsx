@@ -2,7 +2,7 @@ import { create } from 'zustand';
 
 const useAuthStore = create(set => ({
     token: localStorage.getItem('token'),
-    isAdmin: Boolean.valueOf(localStorage.getItem('h167jg784hdla6')),
+    isAdmin: localStorage.getItem('h167jg784hdla6') == 'true',
 
     login: (token, isAdmin) => {
         localStorage.setItem('token', token);
