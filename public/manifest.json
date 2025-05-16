@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Eurovision",
+  "name": "Eurovision 2025 - App votazioni",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,14 +8,14 @@
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "logo192.webp",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "192x144"
     },
     {
-      "src": "logo512.png",
+      "src": "logo512.webp",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "512x384"
     }
   ],
   "start_url": ".",

@@ -38,6 +38,8 @@ const FinalPanel = () => {
     const [limitAwarded, setLimitAwarded] = useState(3);
     const [emailSent, setEmailSent] = useState(false);
     const votePoints = [12, 10, 8, 7, 6, 5, 4, 3, 2, 1];
+    const [showGeneralScores, setShowGeneralScores] = useState({first: false, second: false, third: false});
+    const [showAwardedScores, setShowAwardedScores] = useState({first: false, second: false, third: false});
 
     const {
         register: formRegister,
@@ -148,22 +150,68 @@ const FinalPanel = () => {
         }
     }
 
+    const canShowGeneralScores = (index) => {
+        if (index > 2) return true;
+        else if (index === 0 && showGeneralScores.first) return true;
+        else if (index === 1 && showGeneralScores.second) return true;
+        else return index === 2 && showGeneralScores.third;
+    }
+
+    const canShowAwardedScores = (index) => {
+        if (index > 2) return true;
+        else if (index === 0 && showAwardedScores.first) return true;
+        else if (index === 1 && showAwardedScores.second) return true;
+        else return index === 2 && showAwardedScores.third;
+    }
+
+    const revealAwardedIndex = (index) => {
+        switch (index) {
+            case 0:
+                setShowAwardedScores({...showAwardedScores, first: true});
+                break;
+            case 1:
+                setShowAwardedScores({...showAwardedScores, second: true});
+                break;
+            case 2:
+                setShowAwardedScores({...showAwardedScores, third: true});
+                break;
+            default:
+        }
+    }
+
+    const revealGeneralIndex = (index) => {
+        switch (index) {
+            case 0:
+                setShowGeneralScores({...showGeneralScores, first: true});
+                break;
+            case 1:
+                setShowGeneralScores({...showGeneralScores, second: true});
+                break;
+            case 2:
+                setShowGeneralScores({...showGeneralScores, third: true});
+                break;
+            default:
+        }
+    }
+
     return <>
         <Box display="flex" width="100%" minHeight="95vh">
             <Paper sx={{flex: 1, p: 2}}>
                 <Typography key="final-score-general" variant="h5">Classifica premi</Typography>
                 {(top10 && top10.length === 10) && finalScoreAwarded.map((score, index) => <>
-                    <Typography key={"final-score-general-username-"+index} variant="h6">{index+1}º {score.username}</Typography>
-                    <Typography key={"final-score-general-totalscore-"+index} variant="h6">Punti totali: {score.totalScore}</Typography>
-                    <Typography key={"final-score-general-assignedcountry-"+index} variant="body1">Nazione assegnata: {getFlagEmoji(score.assignedCountry.isoCode)} {score.assignedCountry.label}</Typography>
-                    <Typography key={"final-score-general-bonopoints-"+index} variant="body1">Il più bello: {score.bonoPoints}</Typography>
-                    <Typography key={"final-score-general-bonapoints-"+index} variant="body1">La più bella: {score.bonaPoints}</Typography>
-                    <Typography key={"final-score-general-winnerpoints-"+index} variant="body1">Chi vince?: {score.winnerPoints}</Typography>
-                    <Typography key={"final-score-general-bestsingeroutfit-"+index} variant="body1">Migior outfit - cantante: {score.bestSingerOutfit}</Typography>
-                    <Typography key={"final-score-general-bestfoodpoints-"+index} variant="body1">Miglior cibo: {score.bestFoodPoints}</Typography>
-                    <Typography key={"final-score-general-bestguestoutfit-"+index} variant="body1">Miglior outfit - cosplay: {score.bestGuestOutfitPoints}</Typography>
-                    <Typography key={"final-score-general-rankingaccuracy-"+index} variant="body1">Top10: {score.rankingAccuracy}</Typography>
-                    <br/>
+                    {canShowAwardedScores(index) ? <>
+                        <Typography key={"final-score-awarded-username-"+index} variant="h6">{index+1}º {score.username}</Typography>
+                        <Typography key={"final-score-awarded-totalscore-"+index} variant="h6">Punti totali: {score.totalScore}</Typography>
+                        <Typography key={"final-score-awarded-assignedcountry-"+index} variant="body1">Nazione assegnata: {getFlagEmoji(score.assignedCountry.isoCode)} {score.assignedCountry.label}</Typography>
+                        <Typography key={"final-score-awarded-bonopoints-"+index} variant="body1">Il più bello: {score.bonoPoints}</Typography>
+                        <Typography key={"final-score-awarded-bonapoints-"+index} variant="body1">La più bella: {score.bonaPoints}</Typography>
+                        <Typography key={"final-score-awarded-winnerpoints-"+index} variant="body1">Chi vince?: {score.winnerPoints}</Typography>
+                        <Typography key={"final-score-awarded-bestsingeroutfit-"+index} variant="body1">Migior outfit - cantante: {score.bestSingerOutfit}</Typography>
+                        <Typography key={"final-score-awarded-bestfoodpoints-"+index} variant="body1">Miglior cibo: {score.bestFoodPoints}</Typography>
+                        <Typography key={"final-score-awarded-bestguestoutfit-"+index} variant="body1">Miglior outfit - cosplay: {score.bestGuestOutfitPoints}</Typography>
+                        <Typography key={"final-score-awarded-rankingaccuracy-"+index} variant="body1">Top10: {score.rankingAccuracy}</Typography>
+                        <br/>
+                    </> : <Button onClick={() => revealAwardedIndex(index)}>Scopri il {index+1}º</Button>}
                 </>)}
                 <Box width="25%" p={2}>
                     <Select
@@ -184,17 +232,19 @@ const FinalPanel = () => {
             <Paper sx={{flex: 1, p: 2}}>
                 <Typography key="final-score-general" variant="h5">Classifica generale</Typography>
                 {(top10 && top10.length === 10) && finalScoreGeneral.map((score, index) => <>
-                    <Typography key={"final-score-general-username-"+index} variant="h6">{index+1}º {score.username}</Typography>
-                    <Typography key={"final-score-general-totalscore-"+index} variant="h6">Punti totali: {score.totalScore}</Typography>
-                    <Typography key={"final-score-general-assignedcountry-"+index} variant="body1">Nazione assegnata: {getFlagEmoji(score.assignedCountry.isoCode)} {score.assignedCountry.label}</Typography>
-                    <Typography key={"final-score-general-bonopoints-"+index} variant="body1">Il più bello: {score.bonoPoints}</Typography>
-                    <Typography key={"final-score-general-bonapoints-"+index} variant="body1">La più bella: {score.bonaPoints}</Typography>
-                    <Typography key={"final-score-general-winnerpoints-"+index} variant="body1">Chi vince?: {score.winnerPoints}</Typography>
-                    <Typography key={"final-score-general-bestsingeroutfit-"+index} variant="body1">Migior outfit - cantante: {score.bestSingerOutfit}</Typography>
-                    <Typography key={"final-score-general-bestfoodpoints-"+index} variant="body1">Miglior cibo: {score.bestFoodPoints}</Typography>
-                    <Typography key={"final-score-general-bestguestoutfit-"+index} variant="body1">Miglior outfit - cosplay: {score.bestGuestOutfitPoints}</Typography>
-                    <Typography key={"final-score-general-rankingaccuracy-"+index} variant="body1">Top10: {score.rankingAccuracy}</Typography>
-                    <br/>
+                    {canShowGeneralScores(index) ? <>
+                        <Typography key={"final-score-general-username-"+index} variant="h6">{index+1}º {score.username}</Typography>
+                        <Typography key={"final-score-general-totalscore-"+index} variant="h6">Punti totali: {score.totalScore}</Typography>
+                        <Typography key={"final-score-general-assignedcountry-"+index} variant="body1">Nazione assegnata: {getFlagEmoji(score.assignedCountry.isoCode)} {score.assignedCountry.label}</Typography>
+                        <Typography key={"final-score-general-bonopoints-"+index} variant="body1">Il più bello: {score.bonoPoints}</Typography>
+                        <Typography key={"final-score-general-bonapoints-"+index} variant="body1">La più bella: {score.bonaPoints}</Typography>
+                        <Typography key={"final-score-general-winnerpoints-"+index} variant="body1">Chi vince?: {score.winnerPoints}</Typography>
+                        <Typography key={"final-score-general-bestsingeroutfit-"+index} variant="body1">Migior outfit - cantante: {score.bestSingerOutfit}</Typography>
+                        <Typography key={"final-score-general-bestfoodpoints-"+index} variant="body1">Miglior cibo: {score.bestFoodPoints}</Typography>
+                        <Typography key={"final-score-general-bestguestoutfit-"+index} variant="body1">Miglior outfit - cosplay: {score.bestGuestOutfitPoints}</Typography>
+                        <Typography key={"final-score-general-rankingaccuracy-"+index} variant="body1">Top10: {score.rankingAccuracy}</Typography>
+                        <br/>
+                    </> : <Button onClick={() => revealGeneralIndex(index)}>Scopri il {index+1}º</Button>}
                 </>)}
                 <Box width="25%" p={2}>
                     <Select

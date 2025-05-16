@@ -187,7 +187,7 @@ const VotePage = () => {
 
                                     {category.votePoints.map((points, index) => (
                                         <FormControl key={points} fullWidth margin="normal">
-                                            <InputLabel id={`vote-select-label-${points}`}>Assegna {points} punt{points > 1 ? "i" : "o"}
+                                            <InputLabel id={`vote-select-label-${points}`}>Assegna {points} punt{points > 1 ? "i " : "o "}
                                                 a</InputLabel>
                                             <Select
                                                 labelId={`vote-select-label-${points}`}

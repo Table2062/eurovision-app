@@ -36,7 +36,7 @@ export const deleteUser = async (token, username) => {
 
 //Funzione per cambiare la password di un utente
 export const changeUserPassword = async (token, username, newPassword) => {
-    const response = await fetch(`${AUTH_BASE}/users/${username}`, {
+    const response = await fetch(`${AUTH_BASE}/users/${username}/password`, {
         method: 'PUT',
         headers: {
             'Authorization': `Bearer ${token}`,
