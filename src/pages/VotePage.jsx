@@ -106,7 +106,7 @@ const VotePage = () => {
             >
                 <Container maxWidth="sm">
                     <Box mt={8} p={4} boxShadow={3} borderRadius={2}>
-                        <Box display="flex" justifyContent="space-between" alignItems="center">
+                        <Box p={2} display="flex" justifyContent="space-between" alignItems="center">
                             <IconButton display="flex" justifyContent="flex-start" onClick={() => navigate('/logout')}>
                                 <LogoutIcon/>
                             </IconButton>
@@ -187,7 +187,7 @@ const VotePage = () => {
 
                                     {category.votePoints.map((points, index) => (
                                         <FormControl key={points} fullWidth margin="normal">
-                                            <InputLabel id={`vote-select-label-${points}`}>Assegna {points} punti
+                                            <InputLabel id={`vote-select-label-${points}`}>Assegna {points} punt{points > 1 ? "i" : "o"}
                                                 a</InputLabel>
                                             <Select
                                                 labelId={`vote-select-label-${points}`}

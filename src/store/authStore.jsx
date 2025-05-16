@@ -14,7 +14,7 @@ const useAuthStore = create(set => ({
         localStorage.removeItem('token');
         localStorage.removeItem('h167jg784hdla6');
         set({ token: null, isAdmin: false });
-    },
+    }
 }));
 
 export default useAuthStore;
