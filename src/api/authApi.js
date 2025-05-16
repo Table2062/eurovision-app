@@ -31,8 +31,8 @@ export const login = async (username, password) => {
 };
 
 // Funzione per ottenere tutte le nazioni disponibili
-export const getAllCountries = async () => {
-    const response = await fetch(`${AUTH_BASE}/all-countries`);
+export const getAllCountries = async (onlyAvailable) => {
+    const response = await fetch(`${AUTH_BASE}/all-countries?only-available=${onlyAvailable}`);
 
     if (!response.ok) {
         throw new Error('Errore nel recuperare le nazioni');

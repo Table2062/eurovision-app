@@ -71,7 +71,7 @@ const FinalPanel = () => {
     useEffect(() => {
         const fetchCountries = async () => {
             try {
-                const data = await getAllCountries();
+                const data = await getAllCountries(false);
                 setCountries(data.countries);
             } catch (err) {
                 setError("Errore nel recupero delle nazioni!");

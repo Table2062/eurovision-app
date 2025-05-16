@@ -43,7 +43,7 @@ const RegisterPage = () => {
     useEffect(() => {
         const fetchCountries = async () => {
             try {
-                const data = await getAllCountries();
+                const data = await getAllCountries(true);
                 setCountries(data.countries);
             } catch (err) {
                 setError("Errore nel recupero delle nazioni!");
