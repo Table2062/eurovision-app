@@ -146,18 +146,10 @@ const VotePage = () => {
                         {
                             noCategory && (
                                 <>
-                                    <Typography variant="h4" align="center" gutterBottom>Hey, so che non
-                                        vedi l'ora ma le votazioni non
-                                        sono ancora aperte!</Typography>
+                                    <Typography variant="h4" align="center" gutterBottom>Grazie per aver partecipato alle votazioni per l'Eurovision 2025 ❤️</Typography>
                                     {
-                                        new Date() < new Date("2025-05-17T16:00:00Z") && (
-                                            <Typography variant="h4" align="center"> Torna sabato 17 maggio 2025 alle 18:00
-                                                😉</Typography>
-                                        )
-                                    }
-                                    {
-                                        new Date() > new Date("2025-05-17T16:00:00Z") && (
-                                            <>
+                                        false && (
+                                            <>formRegister
                                                 <Box mt={4} textAlign="center">
                                                     <Button
                                                         fullWidth

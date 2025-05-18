@@ -54,7 +54,7 @@ const RegisterPage = () => {
 
     const onSubmit = async (data) => {
         try {
-            await register(data.username, data.email, data.password, data.assignedCountry);
+            await register(data.username.trim(), data.email.trim(), data.password, data.assignedCountry);
             setSnackbarOpen(true);
             setTimeout(() => navigate("/login"), 2000);
         } catch (err) {
